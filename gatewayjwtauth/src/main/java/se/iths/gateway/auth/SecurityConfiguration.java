@@ -48,8 +48,7 @@ public class SecurityConfiguration {
                 .authorizeExchange()
                 .pathMatchers("/auth/**").permitAll()
                 .pathMatchers(HttpMethod.GET,"/pizzas/**").permitAll()
-                .pathMatchers("/pizzas/**").authenticated()
-                .anyExchange().authenticated()
+                .anyExchange().hasRole("ADMIN")
                 .and().build();
     }
 }

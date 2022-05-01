@@ -72,6 +72,7 @@ public class UserController {
                     .setExpiration(new Date(now + jwtConfig.getExpiration() * 1000L))  // in milliseconds
                     .claim("authorities", grantedAuthorities.stream()
                             .map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
+                    .claim("custom","Hello World")
                     .signWith(SignatureAlgorithm.HS512, jwtConfig.getSecret().getBytes())
                     .compact();
 
