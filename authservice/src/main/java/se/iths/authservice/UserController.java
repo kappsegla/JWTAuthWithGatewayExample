@@ -2,6 +2,7 @@ package se.iths.authservice;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.GrantedAuthority;
@@ -17,6 +18,8 @@ import org.springframework.web.server.ResponseStatusException;
 import se.iths.authservice.common.JwtConfig;
 import se.iths.authservice.entities.User;
 
+import java.security.Key;
+import java.security.KeyPair;
 import java.sql.Date;
 import java.util.Arrays;
 import java.util.List;
@@ -65,6 +68,22 @@ public class UserController {
                             .map(SimpleGrantedAuthority::new)
                             .collect(Collectors.toList());
 
+            //Generating a safe HS256 Secret key
+//            SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+//            String secretString = Encoders.BASE64.encode(key.getEncoded());
+//            logger.info("Secret key: " + secretString);
+
+//            @Value("${jwt.token.secret}")
+//            private String secret;
+//
+//            private Key getSigningKey() {
+//                byte[] keyBytes = Decoders.BASE64.decode(this.secret);
+//                return Keys.hmacShaKeyFor(keyBytes);
+//            }
+            KeyPair keyPair = Keys.keyPairFor(SignatureAlgorithm.ES256);
+
+            // String jws = Jwts.builder().setSubject("Joe").signWith(key).compact();
+
             long now = System.currentTimeMillis();
             String token = Jwts.builder()
                     .setSubject(user.getUsername())
@@ -73,7 +92,7 @@ public class UserController {
                     .claim("authorities", grantedAuthorities.stream()
                             .map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
                     .claim("custom","Hello World")
-                    .signWith(SignatureAlgorithm.HS512, jwtConfig.getSecret().getBytes())
+                    .signWith(keyPair.getPrivate(), SignatureAlgorithm.ES256)
                     .compact();
 
             var tokenInfo = new TokenResponse();

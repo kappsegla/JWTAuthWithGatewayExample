@@ -17,6 +17,8 @@
         <module>gatewayjwtauth</module>
         <module>gatewaynoauth</module>
         <module>jwtwithpublicprivatekeys</module>
+        <module>jwtauth</module>
+        <module>consulserviceregister</module>
     </modules>
 
     <properties>
