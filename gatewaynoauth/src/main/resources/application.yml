@@ -3,7 +3,7 @@ logging:
     org.springframework.cloud.gateway: DEBUG
     reactor.netty.http.client: DEBUG
 server:
-  port: 8081
+  port: 8080
 spring:
   application:
     name: gateway-service
@@ -25,7 +25,7 @@ spring:
           predicates:
             - Path=/persons/**
           filters:
-            - RewritePath=/persons/(?<path>.*), /actuator/health/$\{path}
+            - RewritePath=/persons/(?<path>.*), /api/persons/$\{path}
 #        - id: auth
 #          uri: http://localhost:9100
 #          predicates:
