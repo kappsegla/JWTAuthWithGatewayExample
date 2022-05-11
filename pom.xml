@@ -19,6 +19,7 @@
         <module>jwtwithpublicprivatekeys</module>
         <module>jwtauth</module>
         <module>consulserviceregister</module>
+        <module>rabbit</module>
     </modules>
 
     <properties>
