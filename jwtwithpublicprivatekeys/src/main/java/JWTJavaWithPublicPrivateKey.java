@@ -61,7 +61,7 @@ public class JWTJavaWithPublicPrivateKey {
     }
 
     private static KeyPair getRSAKeys() throws Exception {
-        KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
+        KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("ECDSA");
         keyPairGenerator.initialize(2048);
         return keyPairGenerator.generateKeyPair();
     }

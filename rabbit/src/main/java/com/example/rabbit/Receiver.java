@@ -1,11 +1,14 @@
 package com.example.rabbit;
 
-import org.springframework.stereotype.Component;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessageListener;
+import org.springframework.stereotype.Service;
 
-@Component
-public class Receiver {
 
-   public void receiveMessage(String message) {
-        System.out.println("Received <" + message + ">");
+@Service
+public class Receiver implements MessageListener {
+
+    public void onMessage(Message message) {
+        System.out.println("Consuming Message - " + new String(message.getBody()));
     }
 }
