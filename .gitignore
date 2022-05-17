@@ -3,3 +3,4 @@ mvnw
 mvnw.cmd
 /jwtwithpublicprivatekeys/target/
 /jwtwithpublicprivatekeys/jwtwithpublicprivatekeys.iml
+/swagger/target/classes/
