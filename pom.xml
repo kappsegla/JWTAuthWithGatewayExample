@@ -20,6 +20,7 @@
         <module>jwtauth</module>
         <module>consulserviceregister</module>
         <module>rabbit</module>
+        <module>swagger</module>
     </modules>
 
     <properties>
