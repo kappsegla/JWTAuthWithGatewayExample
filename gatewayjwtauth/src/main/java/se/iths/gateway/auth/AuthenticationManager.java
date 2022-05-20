@@ -36,7 +36,7 @@ public class AuthenticationManager implements ReactiveAuthenticationManager {
                 return Mono.empty();
 
             //Get list of roles for this user
-            ArrayList<String> perms = (ArrayList<String>) claims.getBody().get("authorities");
+            ArrayList<String> perms = (ArrayList<String>) claims.getBody().get("roles");
             var authorities = perms.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
 
             return Mono.just(new UsernamePasswordAuthenticationToken(claims.getBody().getSubject(), null, authorities));

@@ -46,8 +46,7 @@ public class SecurityConfiguration {
                 )).accessDeniedHandler((swe, e) -> Mono.fromRunnable(() ->
                         swe.getResponse().setStatusCode(HttpStatus.FORBIDDEN))).and()
                 .authorizeExchange()
-                .pathMatchers("/auth/**").permitAll()
-                .pathMatchers(HttpMethod.GET,"/pizzas/**").permitAll()
+                .pathMatchers("/auth/**").authenticated()
                 .anyExchange().hasRole("ADMIN")
                 .and().build();
     }
